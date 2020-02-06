@@ -1,15 +1,13 @@
 <template>
   <div id="app">
 
-    <nav class="main-nav">
-      <div id="title">{{ title }}</div>
+    <nav v-if="hasViews" class="main-nav">
       <Burger></Burger>
     </nav>
-
     <Sidebar>
       <ul class="sidebar-panel-nav">
         <li>
-          <a href="/">Overview</a>
+          <a href="/">Everything</a>
         </li>
         <li v-for="view in this.serverInfo.views" :key="view.id">
           <a :href="get_view_url(view)">{{ view.name }}</a>
@@ -69,6 +67,12 @@ export default {
     };
   },
   computed: {
+    hasViews() {
+      if(this.serverInfo != undefined) {
+        return this.serverInfo.views.length > 0;
+      }
+      return false;
+    },
     title() {
       if (this.serverInfo == null) {
         return "Duck";
@@ -154,13 +158,23 @@ export default {
 }
 .main-nav {
   display: flex;
+  width: 1px;
+  float: right;
   justify-content: space-between;
-  padding: 0.5rem 0.8rem;
+  padding-right: 64px;
+  padding-top: 16px;
 }
 ul.sidebar-panel-nav {
   list-style-type: none;
 }
 ul.sidebar-panel-nav > li > a {
+  color: #bbb;
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: block;
+  padding-bottom: 0.5em;
+}
+ul.sidebar-panel-nav > li > a:hover {
   color: #fff;
   text-decoration: none;
   font-size: 1.5rem;

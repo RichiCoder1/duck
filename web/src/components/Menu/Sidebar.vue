@@ -50,6 +50,8 @@
     .sidebar-panel {
         overflow-y: auto;
         background-color: #121212;
+        border-right: 0px solid #393939;
+        box-shadow: 30px 0 30px 0px #12121288;
         position: fixed;
         left: 0;
         top: 0;

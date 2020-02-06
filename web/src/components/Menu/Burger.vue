@@ -45,7 +45,7 @@ button:focus {
   height: 30px;
   width: 32px;
   display: block;
-  z-index: 999;
+  z-index: 9999;
   border: 0;
   border-radius: 0;
   background-color: transparent;
@@ -54,7 +54,7 @@ button:focus {
 }
 
 .burger-bar {
-  background-color: #130f40;
+  background-color: #130f4036;
   position: absolute;
   top: 50%;
   right: 6px;
@@ -91,6 +91,10 @@ button:focus {
 
 #burger.active .burger-button {
   transform: rotate(-180deg);
+}
+
+#burger:hover .burger-bar {
+  background-color: #130f40;
 }
 
 #burger.active .burger-bar {
