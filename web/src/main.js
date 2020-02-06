@@ -6,6 +6,7 @@ import './styles/custom.scss'
 import VueProgressBar from 'vue-progressbar'
 import vueHeadful from 'vue-headful';
 import Moment from 'vue-moment'
+import store from "./store";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
@@ -51,5 +52,6 @@ var router = new VueRouter({
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

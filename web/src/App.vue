@@ -1,5 +1,22 @@
 <template>
   <div id="app">
+
+    <nav class="main-nav">
+      <div id="title">{{ title }}</div>
+      <Burger></Burger>
+    </nav>
+
+    <Sidebar>
+      <ul class="sidebar-panel-nav">
+        <li>
+          <a href="/">Overview</a>
+        </li>
+        <li v-for="view in this.serverInfo.views" :key="view.id">
+          <a :href="get_view_url(view)">{{ view.name }}</a>
+        </li>
+      </ul>
+    </Sidebar>
+
     <div id="builds">
       <vue-headful :title="title" />
       <section v-if="errored && !docker">
@@ -28,12 +45,16 @@
 <script>
 import axios from "axios";
 import builds from "./components/Builds.vue";
+import Burger from "./components/Menu/Burger.vue";
+import Sidebar from "./components/Menu/Sidebar.vue";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
   name: "App",
   components: {
     Builds: builds,
+    Burger,
+    Sidebar,
     PulseLoader
   },
   data() {
@@ -69,6 +90,9 @@ export default {
     }
   },
   methods: {
+    get_view_url: function(view) {
+      return "/?view=" + view.slug
+    },
     loadData: function() {
       this.$Progress.start();
 
@@ -119,11 +143,28 @@ export default {
 
 <style scoped>
 #title {
+  padding-top: 5px;
   padding-bottom: 5px;
+  padding-left: 8px;
 }
 #builds {
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
+}
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.8rem;
+}
+ul.sidebar-panel-nav {
+  list-style-type: none;
+}
+ul.sidebar-panel-nav > li > a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: block;
+  padding-bottom: 0.5em;
 }
 </style>
